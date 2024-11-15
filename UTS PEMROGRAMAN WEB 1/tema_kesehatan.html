@@ -1,0 +1,469 @@
+<html>
+<head>
+    <title>4Peace - Kesehatan Mental</title>
+    <style>
+        /* CSS untuk tampilan */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(147, 203, 255);
+        }
+
+        .navbar {
+            background-color: lightgrey;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            display: none;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            color: #000000;
+            margin: 0;
+            margin-right: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-left: 15px;
+        }
+
+        .navbar ul li a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar ul li.active a {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .profile {
+            color: #000000;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        /* Style untuk form pendaftaran */
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(147, 203, 255);
+        }
+
+        .register-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .register-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .register-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .register-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Style untuk artikel */
+        .article-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .article-item {
+            background-color: white;
+            padding: 90px;
+            width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .article-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        .article-item h4 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        /* Style untuk informasi web */
+        .info-web {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-web h3 {
+            margin-top: 0;
+        }
+
+        /* Style untuk halaman profil */
+        .profile-info {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 250px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .save-button, .edit-button {
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .save-button {
+            background-color: #4CAF50;
+        }
+
+        .save-button:hover {
+            background-color: #45a049;
+        }
+
+        .edit-button {
+            background-color: #FFA500;
+        }
+
+        .edit-button:hover {
+            background-color: #FF8C00;
+        }
+
+        .save-button:disabled {
+            background-color: #A5D6A7;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman Pendaftaran -->
+    <div id="register" class="register-container">
+        <div class="register-form">
+            <h2>Daftar untuk Memulai</h2>
+            <div class="form-group">
+                <label for="registerName">Nama:</label>
+                <input type="text" id="registerName" placeholder="Masukkan nama Anda">
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" placeholder="Masukkan email Anda">
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Kata Sandi:</label>
+                <input type="password" id="registerPassword" placeholder="Masukkan kata sandi Anda">
+            </div>
+            <button onclick="registerUser()">Daftar</button>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="4Peace.jpeg" alt="" style="width: 60px; height: 60px;">
+            <ul>
+                <li id="homeMenu"><a href="#artikel" onclick="showSection('artikel')">Artikel</a></li>
+                <li id="infoWebMenu"><a href="#infoWeb" onclick="showSection('infoWeb')">Informasi Web 4Peace</a></li>
+                <li id="profileMenu"><a href="#profile" onclick="showSection('profile')">Profil</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Konten Artikel -->
+    <div id="artikel" class="container" style="display: none;">
+        <h2>Artikel Kesehatan Mental</h2>
+        <div class="article-list">
+            <div class="article-item" onclick="showArticle(1)">
+                <h4>Artikel 1: Manfaat Meditasi</h4>
+            </div>
+            <div class="article-item" onclick="showArticle(2)">
+                <h4>Artikel 2: Teknik Relaksasi</h4>
+            </div>
+            <div class="article-item" onclick="showArticle(3)">
+                <h4>Artikel 3: Mengatasi Stres</h4>
+            </div>
+            <div class="article-item" onclick="showArticle(4)">
+                <h4>Artikel 4: Mengelola Emosi</h4>
+            </div>
+            <div class="article-item" onclick="showArticle(5)">
+                <h4>Artikel 5: Pentingnya Tidur</h4>
+            </div>
+            <div class="article-item" onclick="showArticle(6)">
+                <h4>Artikel 6: Olahraga dan Kesehatan Mental</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konten Artikel Detail -->
+    <div id="articleDetail" class="container" style="display: none;">
+        <h2 id="articleTitle">Judul Artikel</h2>
+        <p id="articleContent">Konten artikel akan tampil di sini.</p>
+        <button onclick="backToArticles()">Kembali ke Artikel</button>
+    </div>
+
+    <!-- Informasi Web 4Peace -->
+    <div id="infoWeb" class="container" style="display: none;">
+        <h2>Informasi Web 4Peace</h2>
+        <div class="info-web">
+            <p>4Peace adalah platform yang didedikasikan untuk mendukung kesehatan mental pengguna melalui berbagai artikel.</p>
+            <p>Dengan berbagai informasi, sumber daya, dan program yang tersedia, Web 4Peace menawarkan ruang aman bagi individu yang ingin belajar, berbagi, atau mencari bantuan untuk mengatasi tantangan kesehatan mental. Platform ini juga mendorong percakapan terbuka tentang pentingnya kesejahteraan psikologis, serta menyediakan berbagai artikel yang dapat membantu orang untuk mengelola stres, kecemasan, dan masalah emosional lainnya. Fokus utama Web 4Peace adalah menciptakan lingkungan yang mendukung, inklusif, dan penuh empati bagi siapa saja yang membutuhkan.</p>
+            <h3>About Me</h3>
+            <img src="fajrina.jpeg" alt="" style="width: 200px; height: 200px;">
+            <p>Nama Fajrina Nurhaliza dengan NIM [23090087] kelas 3A</p>
+            <p> Fajrina Nurhaliza seorang mahasiswi Teknik Informatika Politeknik Harapan Bersama Tegal</p>
+            <P>
+                Alasan Saya memilih tema kesehatan lebih tepatnya kesehatan mental karena menyadari pentingnya kesejahteraan psikologis dalam kehidupan sehari-hari.
+                Kesehatan mental sering kali terabaikan, padahal pengaruhnya sangat besar terhadap kualitas hidup seseorang, baik dalam hubungan pribadi, pekerjaan, maupun kehidupan sosial. 
+                Dengan meningkatnya tekanan hidup, stres, dan kecemasan yang dialami banyak orang, saya merasa perlu untuk berkontribusi dalam menciptakan kesadaran tentang pentingnya menjaga kesehatan mental. 
+                Melalui tema ini, saya berharap dapat memberikan ruang untuk berbicara lebih terbuka, memberikan dukungan, serta menyediakan informasi yang bermanfaat untuk membantu orang-orang mengelola tantangan psikologis yang mereka hadapi.
+            </P>
+            <ul>
+                <li><a href="https://www.instagram.com/hlzfajrinan_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a></li>
+                <li><a href="https://www.tiktok.com/@xszyails?_t=8rE2xdGDMLi&_r=1" target="_blank">TikTok</a></li>
+                <li><a href="https://www.facebook.com/share/1AkfVnMZQE/" target="_blank">Facebook</a></li>
+                <li><a href="https://www.linkedin.com/in/fajrina-nurhaliza-728142323/" target="_blank">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Profil Pengguna -->
+    <div id="profile" class="container" style="display: none;">
+        <h2>Profil Pengguna</h2>
+        <div class="profile-info">
+            <div class="form-group">
+                <label for="profileName">Nama:</label>
+                <input type="text" id="profileName" readonly>
+            </div>
+            <div class="form-group">
+                <label for="profileEmail">Email:</label>
+                <input type="email" id="profileEmail" readonly>
+            </div>
+            <button class="edit-button" onclick="editProfile()" id="editButton">Edit</button>
+            <button class="save-button" onclick="saveProfile()" id="saveButton" style="display: none;">Simpan</button>
+        </div>
+    </div>
+
+    <script>
+        let userData = {};
+
+        // Fungsi untuk pendaftaran
+        function registerUser() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (name && email && password) {
+                userData = { name, email, password };
+
+                // Menyimpan data pengguna dan mengarahkan ke halaman profil
+                alert('Pendaftaran berhasil! Selamat datang, ' + name);
+                document.getElementById('register').style.display = 'none';
+                document.querySelector('.navbar').style.display = 'flex';
+
+                // Menampilkan profil yang sudah terisi otomatis
+                document.getElementById('profileName').value = userData.name;
+                document.getElementById('profileEmail').value = userData.email;
+                showSection('profile'); // Tampilkan halaman profil
+            } else {
+                alert('Mohon isi semua data.');
+            }
+        }
+
+        // Fungsi untuk navigasi
+        function showSection(sectionId) {
+            document.getElementById('artikel').style.display = 'none';
+            document.getElementById('infoWeb').style.display = 'none';
+            document.getElementById('profile').style.display = 'none';
+            document.getElementById('articleDetail').style.display = 'none';
+
+            // Tampilkan bagian yang dipilih
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Fungsi untuk menampilkan artikel
+        function showArticle(articleId) {
+            const articles = {
+                1: { title: "Manfaat Meditasi untuk kesehatan mental", 
+                    content:["Mengatasi stres Melakukan aktivitas fisik, seperti olahraga dan meditasi, dapat menghasilkan hormon endorfin yang berperan penting dalam mengelola stress.",
+                                    "Hormon ini bertindak sebagai penghilang rasa sakit alami yang juga dapat membuat tidur lebih nyenyak, sehingga stres pun berkurang",
+                                    "Selain itu, teknik meditasi kesadaran (mindfulness meditation) juga dipercaya dapat menurunkan kadar hormon kortisol yang tinggi saat sedang merasa tertekan dan stres.",
+                                    "Mengatasi gangguan kecemasan dan depresi",
+                                    "Rutin melakukan meditasi dipercaya dapat mengatasi masalah pada kesehatan mental. Penelitian menunjukkan bahwa teknik meditasi mindfulness dapat mengurangi rasa cemas dan gelisah yang berlebihan.",
+                                    "Senyawa sitokin yang dilepaskan sebagai respons terhadap stres dapat memengaruhi suasana hati. Hal ini lama-kelamaan bisa meningkatkan risiko terjadinya gangguan mental, misalnya depresi. Melakukan meditasi dengan rutin dipercaya dapat mengurangi kadar sitokin, sehingga dapat mengurangi risiko terjadinya depresi.",
+                                    "Mengendalikan emosi",
+                                    "Bukan hanya meredakan gangguan cemas, melakukan meditasi secara rutin juga dapat membuat Anda merasa lebih tenang, bahagia, dan berpikir positif. Di samping itu, meditasi juga diketahui dapat meningkatkan kinerja otak yang berperan dalam proses belajar, mengingat, dan berkonsentrasi.",
+                                    "Menjaga kesehatan jantung",
+                                    "Stres berlebihan bisa membuat tekanan darah meningkat, sehingga menyebabkan jantung bekerja lebih keras. Kondisi ini bisa menyebabkan terjadinya berbagai masalah pada jantung dan pembuluh darah, seperti serangan jantung dan stroke.",
+                                    "Salah satu cara untuk menurunkan dan menstabilkan tekanan darah adalah dengan rutin melakukan meditasi. Hal ini dikarenakan meditasi dapat membuat Anda lebih mudah mengurangi stres, sehingga tekanan darah pun akan menjadi lebih stabil.",
+                                    "Memperkuat sistem kekebalan tubuh",
+                                    "Meditasi dipercaya mampu menangkal penyakit dan infeksi. Beberapa penelitian menunjukkan adanya peningkatan antibodi atau zat pembentuk kekebalan tubuh yang lebih tinggi pada orang yang rutin bermeditasi.",
+                                    "Tak hanya meditasi, Anda juga perlu menjalani gaya hidup sehat lainnya agar daya tahan tubuh tetap terjaga, seperti mengonsumsi makanan bergizi, mencukupi waktu isirahat, dan tidak merokok.",
+                            ]},
+                2: { title: "Teknik Relaksasi yang dapat membantu mengurangi stres:", 
+                    content: ["Teknik Pernapasan Dalam",
+                                "Latihan pernapasan yang fokus pada pernapasan dalam dapat membantu menenangkan pikiran dan meredakan stres.",
+                                "Teknik Meditasi Singkat",
+                                "Melakukan meditasi singkat secara teratur dapat membantu menenangkan pikiran dan mengurangi stres",
+                                "Olahraga Ringan",
+                                "Melakukan jenis olahraga ringan seperti jalan santai atau yoga dapat membantu meredakan stres dan meningkatkan kesehatan mental.",
+                                "Musik Terapi",
+                                "Mendengarkan jenis musik yang menenangkan dapat membantu menghilangkan stres dan menciptakan suasana yang lebih santai.",
+                                "Visualisasi Positif",
+                                "Menggunakan teknik visualisasi positif dapat membantu menenangkan diri dan mengurangi stres."                                
+                            ]},
+                3: { title: "Cara mengatasi stres dan kecemasan bagaimana??", 
+                    content: ["Relaksasi",
+                                "Latihan pernapasan (berlatih yoga atau tai chi)",
+                                "Latihan fisik (jalan cepat, bersepeda, lari)",
+                                "Sharing dengan orang lain ",
+                                "Selain cara tersebut, Orang yang mengalami stres dan kecemasan sebaiknya mulai menerima jika mereka tidak bisa mengendalikan segalanya yang terjadi.",
+                                "Orang-orang yang mengalami stres dan kecemasan sebaiknya membatasi konsumsi kafein dan alkohol, menjaga pola makan tetap sehat, dan tidur cukup.",
+                                "Strategi untuk menghadapi stres dan kecemasan sehari-hari adalah dengan mengenali dan mengelola emosi kita. Seringkali, stres dan kecemasan muncul karena kita tidak mampu mengendalikan emosi negatif seperti marah dan kecemasan.",
+                                "Selain itu, penting juga untuk memiliki waktu untuk diri sendiri dan melakukan aktivitas yang menyenangkan.",
+                                "Dengan menerapkan strategi dan teknik yang tepat, kita bisa menghadapi stres dan kecemasan dalam kehidupan sehari-hari dengan lebih baik. Ingatlah bahwa mengelola emosi dan merawat diri sendiri adalah kunci utama dalam menjalani hidup yang lebih bahagia dan bermakna."
+                            ]},
+                4: { title: "Bagaimana mengelola emosi dengan bijak??", 
+                    content: ["Mengelola emosi secara efektif memerlukan kesadaran diri dan strategi yang tepat.",
+                                "Sadari emosi: Langkah pertama adalah mengenali emosi yang anda rasakan. Ketahui apa yang memicu perasaan tersebut dan bagaimana reaksi tubuh anda.",
+                                "Latihan pernafasan: Ketika emosi memuncak, seperti marah atau cemas, tarik nafas dalam-dalam secara perlahan. Ini membantu menenangkan sistem saraf dan membuat anda lebih tenang.",
+                                "Ambil jeda: Jika anda merasa tertekan atau emosional, ambillah waktu sejenak untuk menjauh dari situasi. Jeda ini memberikan anda kesempatan untuk menenangkan pikiran sebelum bereaksi.",
+                                "Berpikir positif: Ubah pola pikir negatif menjadi positif. Cobalah untuk melihat sisi baik dari situasi dan hindari memfokuskan diri pada hal-hal yang tidak bisa dikendalikan.",
+                                "Ekspresikan emosi dengan sehat: Jangan menahan emosi. Cobalah untuk berbicara dengan seseorang yang anda percayai atau tuliskan perasaan anda dalam jurnal.",
+                                "Berlatih meditasi atau mindfulness: Kegiatan ini bisa membantu meningkatkan kesadaran diri dan mengurangi reaksi emosional yang berlebihan.",
+                                "Dengan melatih cara-cara di atas secara konsisten, Anda akan lebih mampu mengelola emosi dengan baik dan membuat keputusan yang lebih bijak dalam berbagai situasi."
+                            ]},
+                5: { title: "Pentingnya tidur yang cukup untuk kesehatan mental", 
+                    content: ["Tidur merupakan suatu aktivitas yang mampu memberikan pengaruh terhadap kesehatan fisik dan mental secara menyeluruh.",
+                                "Aktivitas ini memengaruhi produktivitas, kreativitas, kestabilan emosi, berat badan, fungsi kekebalan tubuh (imun), hingga kesehatan organ vital seperti jantung dan otak. Seperti",
+                                "Meningkatkan sistem kekebalan tubuh",
+                                "Saat tidur, tubuh akan mengeluarkan sejenis protein yang disebut sitokin. Sitokin mampu melindungi tubuh dengan cara meningkatkan kinerja sistem kekebalan tubuh.",
+                                "istem imun penting untuk melawan infeksi dan gangguan lainnya. Jika kurang tidur, Anda mungkin tidak memiliki cukup sitokin untuk melindungi tubuh dari penyakit.",
+                                "Sementara itu, kurangnya jam istirahat dapat meningkatkan produksi zat yang memicu peradangan dalam tubuh. Kondisi ini sama seperti saat Anda mengalami asma atau alergi.",
+                                "Memperbaiki suasana hati",
+                                "Istirahat yang cukup bisa memperbaiki suasana hati sehingga membuat Anda lebih segar dan bahagia. Waktu tidur yang cukup juga meningkatkan energi. Ini membuat Anda lebih bersemangat untuk kembali beraktivitas ketika bangun pada keesokan paginya. Dengan begitu, Anda akan mampu menebarkan energi positif dalam berkegiatan. Hal ini tentu saja tidak hanya berdampak pada diri Anda, tetapi juga orang lain di sekitar.",
+                                " Membantu menyalurkan emosi",
+                                "Para ahli belum sepenuhnya memahami mengapa manusia bermimpi, tetapi mimpi diketahui dapat menjadi media untuk menyalurkan emosi setelah beraktivitas seharian. Emosi ini bisa timbul akibat stres dari masalah sehari-hari hingga gangguan mental seperti depresi dan gangguan kecemasan. Melalui mimpi dalam tahapan tidur REM, Anda dapat menyalurkan dan mengelola emosi tersebut dengan baik. Bahkan, beberapa orang bisa menemukan solusi dari masalahnya ketika bermimpi."
+                            ]},
+                6: { title: "Apa hubungan antara olahraga dan kesehatan mental?", 
+                    content: ["Hubungan rumit antara olahraga dan kesehatan mental, menjelaskan mekanisme yang mendasari hubungan ini, dan memberikan panduan tentang olahraga yang dapat berkontribusi pada kesejahteraan mental.",
+                                "Olahraga bertindak sebagai penambah suasana hati alami dengan memicu pelepasan neurotransmiter, termasuk endorfin, serotonin, dan dopamin.. Bahan kimia ini memainkan peran penting dalam regulasi suasana hati, pengurangan kecemasan, dan mengurangi gejala depresi. Endorfin, sering disebut sebagai hormon (perasaan-baik), menciptakan rasa euforia, serotonin berkontribusi pada keseimbangan emosional, dan dopamin dikaitkan dengan hadiah dan kesenangan.",
+                                "Tuntutan hidup sehari-hari seringkali mengakibatkan peningkatan tingkat stres, sehingga berdampak buruk pada kesehatan mental. Olahraga berfungsi sebagai penghalang stres yang kuat dengan mengurangi produksi hormon stres seperti kortisol. Aktivitas fisik reguler menyediakan outlet untuk ketegangan terpendam, mempromosikan relaksasi dan kejernihan mental.",
+                                "Latihan fisik terkait erat dengan peningkatan fungsi kognitif dan penurunan risiko penurunan kognitif. Salah satu mekanisme utama yang melaluinya olahraga bermanfaat bagi otak adalah dengan meningkatkan neuroplastisitas, kemampuan otak untuk membentuk dan mengatur ulang koneksi sinaptik. Hal ini menyebabkan peningkatan memori, fokus yang lebih tajam, dan penurunan risiko penyakit neurodegeneratif.",
+                                "Tidur yang berkualitas sangat penting bagi kesehatan mental, dan olahraga memainkan peran penting dalam mendorong tidur nyenyak. Aktivitas fisik selama berolahraga membantu mengatur pola tidur, berkontribusi pada kesejahteraan mental keseluruhan yang lebih baik. Tidur yang memadai meningkatkan suasana hati, fungsi kognitif, dan ketahanan emosional.",
+                                "Olahraga memberikan jalan unik untuk interaksi sosial, membina hubungan yang berkontribusi signifikan terhadap kesehatan mental. Baik melalui olahraga tim, kelas kebugaran kelompok, atau kegiatan sederhana seperti berjalan dengan teman, keterlibatan sosial adalah aspek mendasar dari kesejahteraan. Interaksi ini menawarkan dukungan emosional, rasa memiliki, dan berupaya mengurangi perasaan terisolasi.",
+                                "Olahraga teratur berdampak besar pada harga diri dan citra tubuh. Mencapai tujuan kebugaran, terlepas dari ukuran atau intensitas, menumbuhkan rasa pencapaian dan harga diri. Pergeseran persepsi ini dapat secara signifikan berkontribusi pada peningkatan kesehatan mental dan citra diri yang lebih positif.",
+                                "Menetapkan rutinitas olahraga yang teratur tidak hanya bermanfaat bagi kesehatan fisik tetapi juga berperan penting dalam menumbuhkan disiplin dan struktur dalam kehidupan sehari-hari.. Rutinitas ini berkontribusi pada rasa stabilitas dan prediktabilitas, yang merupakan elemen penting untuk menjaga kesehatan mental. Komitmen terhadap aktivitas fisik secara teratur juga dapat berfungsi sebagai mekanisme penanggulangan yang berharga selama masa-masa sulit, memberikan jalan keluar yang dapat diandalkan untuk mengatasi stres dan meningkatkan ketahanan.",
+                                "Hubungan antara olahraga dan kesehatan mental merupakan hubungan yang dinamis dan memiliki banyak aspek. Selain manfaat fisik, aktivitas fisik teratur juga berdampak positif terhadap pelepasan neurotransmitter, pengurangan stres, fungsi kognitif, kualitas tidur, interaksi sosial, dan harga diri. Mengenali dan memanfaatkan kekuatan olahraga sebagai alat untuk kesejahteraan mental adalah pendekatan holistik yang dapat menghasilkan kehidupan yang lebih bahagia, sehat, dan memuaskan. Jadi, renda sepatu kets itu, merangkul gerakan, dan memulai perjalanan menuju pikiran yang sehat dalam tubuh yang sehat."
+                            ]}
+            };
+
+            const article = articles[articleId];
+
+            document.getElementById('articleTitle').textContent = article.title;
+            document.getElementById('articleContent').textContent = article.content;
+
+            showSection('articleDetail'); // Tampilkan detail artikel
+        }
+
+        // Fungsi untuk kembali ke artikel
+        function backToArticles() {
+            showSection('artikel');
+        }
+
+        // Fungsi untuk mengedit profil
+        function editProfile() {
+            document.getElementById('profileName').readOnly = false;
+            document.getElementById('profileEmail').readOnly = false;
+            document.getElementById('editButton').style.display = 'none';
+            document.getElementById('saveButton').style.display = 'inline-block';
+        }
+
+        // Fungsi untuk menyimpan profil
+        function saveProfile() {
+            const name = document.getElementById('profileName').value;
+            const email = document.getElementById('profileEmail').value;
+
+            userData.name = name;
+            userData.email = email;
+
+            document.getElementById('profileName').readOnly = true;
+            document.getElementById('profileEmail').readOnly = true;
+            document.getElementById('editButton').style.display = 'inline-block';
+            document.getElementById('saveButton').style.display = 'none';
+
+            alert('Profil berhasil diperbarui!');
+        }
+    </script>
+</body>
+</html>
